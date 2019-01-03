@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 int main()
 {
 	int i = 0;
@@ -9,8 +10,9 @@ int main()
 		{
 			printf("%d*%d=%d\t",j,i,i*j);
 		}
-		//printf("\n");
-		system("pause");
+		printf("\n");
+		
 	}
+	system("pause");
 	return 0;
 }
