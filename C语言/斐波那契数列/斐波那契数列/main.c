@@ -1,17 +1,35 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
 #include<stdlib.h>
+//
+//int fib(int a)//迭代计算斐波那契数列
+//{
+//	if (a <= 2)
+//	{
+//		return 1;
+//	}
+//	else
+//		return fib(a - 1) + fib(a - 2);
+//
+//}
 
-int fib(int a)
+int fib(int m)//非迭代计算斐波那契数列
 {
-	if (a <= 2)
+	int i = 0;
+	int a = 1;
+	int b = 1;
+	int c = 2;
+	for (i = 0; i < m - 2; i++)
 	{
-		return 1;
+		if (m < 3)
+			return 1;
+		a = b;
+		b = c;
+		c = a + b;
 	}
-	else
-		return fib(a - 1) + fib(a - 2);
-
+	return c;
 }
+
 int main()
 {
 	int n = 0;
