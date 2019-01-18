@@ -33,6 +33,7 @@ void reverse(int* p, int sz)
 
 	}
 }
+ 
 int main()
 {
 	//初始化数组

@@ -2,17 +2,20 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int sum = 0;
+int sum;
 
 int place_sum(int n)
 {
 	if (0 != n)
 	{
-		sum += n % 10 + place_sum(n = n / 10);
-		
-		return  sum;
+	    sum += n % 10;
+		n = n / 10;
+		place_sum(n);
 
 	}
+	
+	return sum;
+	
 }
 
 int main()
@@ -25,10 +28,3 @@ int main()
 	system("pause");
 	return 0;
 }
-//int main()
-//{
-//	int num = 2 % 10;
-//	printf("%d\n", num);
-//	system("pause");
-//	return 0;
-//}
