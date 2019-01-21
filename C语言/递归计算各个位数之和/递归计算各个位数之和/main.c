@@ -4,13 +4,13 @@
 
 int sum;
 
-int place_sum(int n)
+int Digitsum(int n)
 {
 	if (0 != n)
 	{
 	    sum += n % 10;
 		n = n / 10;
-		place_sum(n);
+		Digitsum(n);
 
 	}
 	
@@ -23,7 +23,7 @@ int main()
 	int num = 0;
 	printf("请输入一个非负整数：\n");
 	scanf("%d", &num);
-	int ret = place_sum(num);
+	int ret = Digitsum(num);
 	printf("%d\n", ret);
 	system("pause");
 	return 0;
