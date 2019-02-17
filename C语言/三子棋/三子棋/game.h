@@ -8,6 +8,13 @@
 #define ROW 3
 #define COL 3
 
-void InitBoard(char Board[ROW][COL]);
-void PrintBoard(char Board[ROW][COL]);
+void InitBoard(char Board[ROW][COL], int row, int col);
+void PrintBoard(char Board[ROW][COL], int row, int col);
+void menu();
+void PlayerMove(char Board[ROW][COL], int row, int col);
+void ComputerMove(char Board[ROW][COL], int row, int col);
+int CheckWin(char Board[ROW][COL], int row, int col);
+int CheckFull(char Board[ROW][COL], int row, int col);
+
+
 #endif

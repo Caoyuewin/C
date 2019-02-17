@@ -1,2 +1,9 @@
-﻿  game.c
-  三子棋.vcxproj -> F:\比特\github库\C语言\三子棋\Debug\三子棋.exe
+﻿  function.c
+f:\比特\github库\c语言\三子棋\三子棋\function.c(31): error C2065: “j”: 未声明的标识符
+f:\比特\github库\c语言\三子棋\三子棋\function.c(33): error C2065: “j”: 未声明的标识符
+f:\比特\github库\c语言\三子棋\三子棋\function.c(40): error C2065: “j”: 未声明的标识符
+f:\比特\github库\c语言\三子棋\三子棋\function.c(40): error C2143: 语法错误: 缺少“;”(在“)”的前面)
+f:\比特\github库\c语言\三子棋\三子棋\function.c(43): error C2065: “j”: 未声明的标识符
+f:\比特\github库\c语言\三子棋\三子棋\function.c(52): warning C4029: 声明的形参表不同于定义
+  game.c
+  正在生成代码...

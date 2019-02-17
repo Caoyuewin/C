@@ -10,33 +10,43 @@ void menu()
 
 }
 
-void InitBoard(char Board[ROW][COL])//初始化棋盘
+void InitBoard(char Board[ROW][COL], int row, int col)//初始化棋盘
 {
 	int i = 0;
 	int j = 0;
-	for (i = 0; i < ROW; i++)
+	for (i = 0; i < row; i++)
 	{
-		for (j = 0; j < COL; j++)
+		for (j = 0; j < col; j++)
 		{
 			Board[i][j] = ' ';
 		}
 	}
 }
 
-void PrintBoard(char Board[ROW][COL])//打印棋盘
+void PrintBoard(char Board[ROW][COL],int row, int col)//打印棋盘
 {
 	int i = 0;
-	for (i = 0; i < 3; i++)
+	int j = 0;
+	for (i = 0; i < row; i++)
 	{
-		printf("%c     |%c     |%c     |\n", Board[i][0], Board[i][1], Board[i][2]);
-		if (2 != i)
+		for (j = 0; j < col; j++)
 		{
-			printf("------|------|------|\n");
+			printf(" %c ", Board[i][j]);
+			if (i < row - 1)
+				printf("|");
+		}
+		printf("\n");
+		if (i < col - 1)
+		{
+			for (j = 0, j < col, j++)
+			{
+				printf("---");
+				if (j < col - 1)
+					printf("|");
+			}
+			printf("\n");
 		}
 	}
-
-
-
 }
 
 void PlayerMove(char Board[ROW][COL])//玩家下棋
@@ -48,13 +58,13 @@ void PlayerMove(char Board[ROW][COL])//玩家下棋
 
 }
 
-int CheckFull(char Board[ROW][COL])//检查棋盘是否填满
+int CheckFull(char Board[ROW][COL], int row, int col)//检查棋盘是否填满
 {
 	int i = 0;
 	int j = 0;
-	for (i = 0; i < ROW; i++)
+	for (i = 0; i < row; i++)
 	{
-		for (j = 0; j < COL; j++)
+		for (j = 0; j < col; j++)
 		{
 			if (Board[i][j] == ' ')
 				return 0;
@@ -63,11 +73,11 @@ int CheckFull(char Board[ROW][COL])//检查棋盘是否填满
 	return 1;
 }
 
-int CheckWin(char Board[ROW][COL])
+int CheckWin(char Board[ROW][COL], int row, int col)
 {
 	int i = 0;
 	int j = 0;
-	for (i = 0; i < ROW; i++)//行相同
+	for (i = 0; i < row; i++)//行相同
 	{
 		if ((Board[i][0] == Board[i][1]) && (Board[i][1] == Board[i][2]))
 		{
@@ -82,7 +92,7 @@ int CheckWin(char Board[ROW][COL])
 		}
 	}
 
-	for (i = 0; i < COL; i++)//列相同
+	for (i = 0; i < col; i++)//列相同
 	{
 		if ((Board[0][i] == Board[1][i]) && (Board[1][i] == Board[2][i]))
 		{
@@ -118,7 +128,7 @@ int CheckWin(char Board[ROW][COL])
 		}
 		if (Board[0][2] == 0)
 		{
-			printf("玩家获胜");
+			printf("玩家获胜\n");
 		}
 	}
 }
