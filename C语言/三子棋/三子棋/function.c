@@ -3,10 +3,10 @@
 
 void menu()
 {
-	printf("****************************************");
-	printf("**************** 1.play ****************");
-    printf("**************** 2.exit ****************");
-	printf("****************************************");
+	printf("****************************************\n");
+	printf("**************** 1.play ****************\n");
+    printf("**************** 0.exit ****************\n");
+	printf("****************************************\n");
 
 }
 
@@ -32,16 +32,16 @@ void PrintBoard(char Board[ROW][COL],int row, int col)//打印棋盘
 		for (j = 0; j < col; j++)
 		{
 			printf(" %c ", Board[i][j]);
-			if (i < row - 1)
+			if (j < col - 1)
 				printf("|");
 		}
 		printf("\n");
-		if (i < col - 1)
+		if (i < row - 1)
 		{
-			for (j = 0, j < col, j++)
+			for (j = 0; j < col; j++)
 			{
 				printf("---");
-				if (j < col - 1)
+				if (j < col -1)
 					printf("|");
 			}
 			printf("\n");
@@ -49,16 +49,51 @@ void PrintBoard(char Board[ROW][COL],int row, int col)//打印棋盘
 	}
 }
 
-void PlayerMove(char Board[ROW][COL])//玩家下棋
+void PlayerMove(char Board[ROW][COL],int row, int col)//玩家下棋
 {
 	int x = 0;
 	int y = 0;
-	printf("请输入坐标：");
-	scanf("%d%d", &x, &y);
-
+	while (1)
+	{
+		printf("玩家走：\n");
+		printf("请输入坐标：\n");
+		scanf("%d%d", &x, &y);
+		x--;
+		y--;
+		if (x < row && x >= 0 && y < col && y >= 0)
+		{
+			if (Board[x][y] == ' ')
+			{
+				Board[x][y] = '*';
+				break;
+			}
+		    if (Board[x][y] == '$')
+				printf("坐标已被占用，请重新输入\n");
+		}
+		else
+			printf("请输入有效值\n");
+	}
+	
 }
 
-int CheckFull(char Board[ROW][COL], int row, int col)//检查棋盘是否填满
+void ComputerMove(char Board[ROW][COL], int row, int col)//电脑随机走一个位置
+{
+	int x = 0;
+	int y = 0;
+	printf("电脑走：\n");
+	while (1)
+	{
+		x = rand() % 3;
+		y = rand() % 3;
+		if (Board[x][y] == ' ')
+		{
+			Board[x][y] = '$';
+			break;
+		}
+	}
+}
+
+static int CheckFull(char Board[ROW][COL], int row, int col)//检查棋盘是否填满
 {
 	int i = 0;
 	int j = 0;
@@ -73,62 +108,38 @@ int CheckFull(char Board[ROW][COL], int row, int col)//检查棋盘是否填满
 	return 1;
 }
 
-int CheckWin(char Board[ROW][COL], int row, int col)
+char CheckWin(char Board[ROW][COL], int row, int col)
 {
 	int i = 0;
 	int j = 0;
 	for (i = 0; i < row; i++)//行相同
 	{
-		if ((Board[i][0] == Board[i][1]) && (Board[i][1] == Board[i][2]))
+		if ((Board[i][0] == Board[i][1]) && (Board[i][1] == Board[i][2]) && Board[i][1] != ' ')
 		{
-			if (Board[i][0] == 1)
-			{
-				printf("电脑获胜\n");
-			}
-			if (Board[i][0] == 0)
-			{
-				printf("玩家获胜\n");
-			}
+			return Board[i][0];
 		}
 	}
 
 	for (i = 0; i < col; i++)//列相同
 	{
-		if ((Board[0][i] == Board[1][i]) && (Board[1][i] == Board[2][i]))
+		if ((Board[0][i] == Board[1][i]) && (Board[1][i] == Board[2][i]) && Board[1][i] != ' ')
 		{
-			if (Board[0][i] == 1)
-			{
-				printf("电脑获胜\n");
-			}
-			if (Board[0][i] == 0)
-			{
-				printf("玩家获胜\n");
-			}
+			return Board[0][i];
 		}
 	}
 
-	if ((Board[0][0] == Board[1][1]) &&( Board[1][1] == Board[2][2]))//对角线相同
+	if ((Board[0][0] == Board[1][1]) &&( Board[1][1] == Board[2][2]) && Board[1][1] != ' ')//对角线相同
 	{
-		if (Board[0][0] == 1)
-		{
-			printf("电脑获胜\n");
-		}
-		if (Board[0][0] == 0)
-		{
-			printf("玩家获胜");
-		}
+		return Board[0][0];
 	}
-
-
-	if ((Board[0][2] == Board[1][1]) && (Board[1][1] == Board[2][0]))//对角线相同
+	
+	if ((Board[0][2] == Board[1][1]) && (Board[1][1] == Board[2][0]) && Board[1][1] != ' ')//对角线相同
 	{
-		if (Board[0][2] == 1)
-		{
-			printf("电脑获胜\n");
-		}
-		if (Board[0][2] == 0)
-		{
-			printf("玩家获胜\n");
-		}
+		return Board[0][2];
 	}
+	
+	int ret = CheckFull(Board, row, col);
+	if (ret == 1)
+		return 'P';
+	return ' ';
 }

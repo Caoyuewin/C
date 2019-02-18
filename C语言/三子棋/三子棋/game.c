@@ -4,24 +4,47 @@
 void game()
 {
 	char Board[ROW][COL];	
+	InitBoard(Board, ROW, COL);
 	PrintBoard(Board, ROW, COL);
+	char ret = 0;
 	while (1)
 	{
-		char ret = 0;
 		PlayerMove(Board, ROW, COL);
+		ret = CheckWin(Board, ROW, COL);
 		PrintBoard(Board, ROW, COL);
+		if (ret != ' ')
+		{
+			break;
+		}
 		ComputerMove(Board, ROW, COL);
+		ret = CheckWin(Board, ROW, COL);
 		PrintBoard(Board, ROW, COL);
+		if (ret != ' ')
+		{
+			break;
+		}
+	}
+	if (ret == '*')
+	{
+		printf("你赢了\n");
+	}
+	if (ret == '$')
+	{
+		printf("你输了\n");
+	}
+	if (ret == 'P')
+	{
+		printf("平局\n");
 	}
 }
 int main()
 {
 	int input = 0;
+	srand((unsigned int)time(NULL));
 	char Board[ROW][COL] = {0};
-	InitBoard(Board, ROW, COL);
-	menu();
 	do
 	{
+		menu();
 		printf("请选择\n");
 		scanf("%d", &input);
 		switch (input)
