@@ -1,3 +1,1 @@
-﻿  game.c
-f:\比特\github库\c语言\扫雷\扫雷\game.c(50): warning C4029: 声明的形参表不同于定义
-  扫雷.vcxproj -> F:\比特\github库\C语言\扫雷\Debug\扫雷.exe
+﻿  扫雷.vcxproj -> F:\比特\github库\C语言\扫雷\Debug\扫雷.exe

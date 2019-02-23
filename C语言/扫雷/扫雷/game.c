@@ -61,6 +61,23 @@ void SetBoom(char Board[ROWS][COLS])//ÉèÖÃÀ×
 	}
 }
 
+int CountMine(char boom[ROWS][COLS], int x, int y)
+{
+	return (boom[x - 1][y] + boom[x - 1][y - 1] + boom[x][y - 1] + boom[x + 1][y - 1] +
+		boom[x + 1][y] + boom[x + 1][y + 1] + boom[x][y + 1] + boom[x - 1][y + 1] - 8 * '0');
+}
+
+void Expand(char boom[ROWS][COLS], char show[ROWS][COLS], int x, int y)
+{
+	if (x > 0 && CountMine(boom, x - 1, y) == 0)
+	{
+		show[x][y] = ' ';
+		x -= 1;
+		Expand(boom, show, x, y);
+	}
+	else
+		show[x][y] = CountMine(boom, x, y) + '0';
+}
 int SearchBoom(char boom[ROWS][COLS], char show[ROWS][COLS], int rows, int cols)
 {
 	int x = 0;
@@ -74,9 +91,12 @@ int SearchBoom(char boom[ROWS][COLS], char show[ROWS][COLS], int rows, int cols)
 		{
 			if (boom[x][y] == '0')
 			{
-				show[x][y] = '&';
+				char count = CountMine(boom, x, y);
+				//show[x][y] = count + '0';
 				NotBoom--;
+				Expand(boom, show, x, y);
 				PrintBoard(show, ROWS, COLS);
+				PrintBoard(boom, ROWS, COLS);
 			}
 			if(boom[x][y] == '1')
 			{
