@@ -43,7 +43,57 @@ char* my_strchr(char ch, char* src)
 
 int my_strcmp(char* str1, char* str2)
 {
+	assert(str1);
+	assert(str2);
 	while (*str1 == *str2)
+	{
+		if (*str1 == 0)
+			return 0;
+		str1++;
+		str2++;
+	}
+	return *str1 - *str2;
+
+}
+
+char* my_strncpy(char* dst, char* src, size_t n)
+{
+	assert(dst);
+	assert(src);
+	char* start = dst;
+	while (n--)
+	{
+		*dst = *src;
+		dst++;
+		src++;
+	}
+	return start;
+}
+
+char* my_strncat(char* dst, char* src, size_t n)
+{
+	assert(dst);
+	assert(src);
+	char* start = dst;
+	while (n--)
+	{
+		while (*dst != 0)
+		{
+			dst++;
+		}
+		*dst = *src;
+		dst++;
+		src++;
+	}
+	return start;
+}
+
+int my_strncmp(char* str1, char* str2, size_t n)
+{
+	n--;
+	assert(str1);
+	assert(str2);
+	while ((*str1 == *str2) && n--)
 	{
 		if (*str1 == 0)
 			return 0;

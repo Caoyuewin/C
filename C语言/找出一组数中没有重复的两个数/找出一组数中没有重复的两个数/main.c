@@ -15,18 +15,23 @@ struct Test
 	int b;
 };
 
-struct Test search_dif(char* p)
+struct Test search_dif(char* p, size_t n)
 {
 	struct Test Dif;
-	Dif.a = 1;
-	Dif.b = 2;
+	struct Test Dif  = 0;
+	Dif.b = 0;
+	int i = 0;
+	for (i = 0; i < n; i++)
+	{
+		a = (p[i] &= 1);
+	}
 	return  Dif;
 }
 
 int main()
 {
 	char arr[] = { 1,2,3,4,5,6,1,2,3,4 };
-	struct Test  = search_dif(arr);
+	struct Test  = search_dif(arr, 10);
 	printf("%d,%d\n", .a, cyw.b);
 	system("pause");
 	return 0;
