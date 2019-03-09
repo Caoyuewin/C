@@ -6,7 +6,7 @@
 #include<memory.h>
 #include<string.h>
 
-#define SIZE 1
+
 
 typedef struct Addresslist {
 	char name[1024];
@@ -14,8 +14,9 @@ typedef struct Addresslist {
 }Addresslist;//模块编程时如果多模块需要使用结构体就在头文件定义结构体
 
 typedef struct Book {
-	Addresslist num[SIZE];
+	Addresslist* num[1];
 	unsigned int count;
+	unsigned int capacity ;
 }Book;
 
 
