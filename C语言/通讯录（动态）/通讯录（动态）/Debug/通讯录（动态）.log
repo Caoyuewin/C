@@ -1,1 +1,4 @@
-﻿
+﻿  list.c
+f:\比特\github库\c语言\通讯录（动态）\通讯录（动态）\list.c(172): warning C4018: “<”: 有符号/无符号不匹配
+f:\比特\github库\c语言\通讯录（动态）\通讯录（动态）\list.c(173): warning C4133: “函数”: 从“Addresslist *”到“char *”的类型不兼容
+  通讯录（动态）.vcxproj -> F:\比特\github库\C语言\通讯录（动态）\Debug\通讯录（动态）.exe

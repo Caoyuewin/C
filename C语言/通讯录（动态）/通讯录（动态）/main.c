@@ -29,7 +29,8 @@ int main()
 			
 		}
 	} while (ret);
-	Free();
+	Save(&list);
+	free(list.num);
 	system("pause");
 	return 0;
 }

@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-#ifndef _LIST_H_
+
+#pragma once
 #define _LIST_H_
 #include<stdio.h>
 #include<stdlib.h>
@@ -14,7 +15,7 @@ typedef struct Addresslist {
 }Addresslist;//模块编程时如果多模块需要使用结构体就在头文件定义结构体
 
 typedef struct Book {
-	Addresslist* num[1];
+	Addresslist* num;
 	unsigned int count;
 	unsigned int capacity ;
 }Book;
@@ -28,11 +29,10 @@ void Delete(Book* plist);//删除联系人
 void Find(Book* plist);//查找联系人
 void Amend(Book* plist);//修改联系人
 void CleanAll(Book* plist);//清除所有联系人
-Book* Capacity(Book* plist);//电话本扩容
-void Free();//释放动态开辟的空间
+void Capacity(Book* plist);//电话本扩容
+void Save(Book* plist);//保存到本地
 
 
 
 
 
-#endif // !1

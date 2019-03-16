@@ -22,22 +22,20 @@ int menu() {
 //初始化联系人列表
 void InitList(Book* plist) {
 	plist->count = 0;
-	memset(plist->num, 0, sizeof(plist->num));
+	plist->num = malloc(sizeof(Addresslist));
 	plist->capacity = 1;
 }
 
 
 
 //扩容函数
-Book* Capacity(Book* plist) {	
+void Capacity(Book* plist) {	
 
-	Addresslist* newplist = realloc(plist->num, sizeof(Addresslist) * plist->capacity + 1);
-	
+	Addresslist* newplist = (Addresslist*)realloc(plist->num, sizeof(Addresslist) * plist->capacity + 1);
+	plist->capacity++;
 	if (newplist != NULL) {
-		plist->num = newplist;
-		
+		plist->num = newplist;	
 	}
-	return newplist;
 }
 
 //打印联系人
@@ -45,33 +43,33 @@ void PrintAll(Book* plist) {
 	unsigned int i = 0;
 	printf("通讯录\n");
 	for (i = 0; i < (plist->count); i++) {
-		printf("姓名：%s\n", plist->num[i]->name);
-		printf("电话号码：%s\n", plist->num[i]->phone);
+		printf("姓名：%s\n", plist->num[i].name);
+		printf("电话号码：%s\n", plist->num[i].phone);
 	}
 }
 
 //添加联系人
 void Add(Book* plist) {
 	if (plist->count == plist->capacity) {
-		plist = Capacity(plist);
+		Capacity(plist);
 	}
 	printf("联系人姓名：\n");
-	scanf("%s", plist->num[plist->count]->name);//输入姓名
+	scanf("%s", plist->num[plist->count].name);//输入姓名
 	printf("联系人号码：\n");
-	scanf("%s", plist->num[plist->count]->phone);//输入号码
+	scanf("%s", plist->num[plist->count].phone);//输入号码
 	plist->count++;
 }
 
 //释放开辟的空间
-void Free() {
-	free(newplist);
-}
+//void Free() {
+//	free(newplist);
+//}
 
 //查找函数
 static int Findname(char* pname, Book* plist) {
 	unsigned int i = 0;
 	for (i = 0; i < (plist->count); i++) {
-		int ret = strcmp(pname, plist->num[i]->name);
+		int ret = strcmp(pname, plist->num[i].name);
 		if (ret == 0) {
 			return i;
 		}
@@ -117,8 +115,8 @@ void Find(Book* plist) {
 	int num = Findname(name, plist);
 	if (num != -1) {
 		printf("找到了");
-		printf("姓名 ：%s\n", plist->num[num]->name);
-		printf("号码：%s\n", plist->num[num]->phone);
+		printf("姓名 ：%s\n", plist->num[num].name);
+		printf("号码：%s\n", plist->num[num].phone);
 
 	}
 	else
@@ -134,12 +132,12 @@ void Amend(Book* plist) {
 	if (num != -1) {
 		printf("请重新输入联系人信息\n");
 		printf("联系人姓名：\n");
-		scanf("%s", plist->num[num]->name);
+		scanf("%s", plist->num[num].name);
 		printf("联系人号码：\n");
-		scanf("%s", plist->num[num]->phone);
+		scanf("%s", plist->num[num].phone);
 		printf("修改成功\n");
-		printf("姓名：%s\n", plist->num[num]->name);
-		printf("号码：%s\n", plist->num[num]->phone);
+		printf("姓名：%s\n", plist->num[num].name);
+		printf("号码：%s\n", plist->num[num].phone);
 
 
 
@@ -159,9 +157,24 @@ void CleanAll(Book* plist) {
 	if (choice) {
 		unsigned int i = 0;
 		for (i = 0; i < plist->count; i++) {
-			*plist->num[i]->name = 0;
-			*plist->num[i]->phone = 0;
+			*plist->num[i].name = 0;
+			*plist->num[i].phone = 0;
 		}
 
 	}
+}
+
+//保存到本地文件夹
+void Save(Book* plist) {
+	FILE* pf;
+	pf = fopen("myfile2.txt", "a+");
+	if (pf != NULL) {
+		for (int i = 0; i < plist->count; i++) {
+			//fscanf(&plist->num[i], sizeof(Addresslist), pf);
+			fwrite(&plist->num[i], sizeof(Addresslist), 1, pf);
+		}
+	}
+	else
+		perror("fopen() failed:");
+	fclose(pf);
 }
