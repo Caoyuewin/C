@@ -12,21 +12,35 @@
 //	system("pause");
 //	return 0;
 //}
+//
+//typedef struct Test{
+//	char a ;
+//	int b[2];
+//	int c;
+//}Test;
+//
+//int main() {
+//	
+//	Test test = { 'a',{1,2},0 };
+//	FILE* pf;
+//	pf = fopen("myfile.txt", "w");
+//	if (pf != NULL) {
+//		fputc(test.a, pf);
+//	}
+//	system("pause");
+//	return 0;
+//}
 
-typedef struct Test{
-	char a ;
-	int b[2];
-	int c;
-}Test;
+int LenthoflongestSubstring(char* s) {
+	char* start = 
+
+}
 
 int main() {
+	char arr[] = "abcdefabef";
 	
-	Test test = { 'a',{1,2},0 };
-	FILE* pf;
-	pf = fopen("myfile.txt", "w");
-	if (pf != NULL) {
-		fputc(test.a, pf);
-	}
+
+
 	system("pause");
 	return 0;
 }
